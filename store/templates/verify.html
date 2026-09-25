@@ -1,0 +1,5 @@
+<!doctype html><html><body style="font-family:Arial;background:#0c1117;color:white;padding:50px">
+<h1>Enter login code</h1><form method="post"><input name="code" inputmode="numeric" maxlength="6" required>
+<button>Sign in</button></form>
+{% if dev_code %}<p>Development login code: <b>{{dev_code}}</b></p>{% endif %}
+</body></html>

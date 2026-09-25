@@ -1,0 +1,6 @@
+Copyright (c) 2026 Castwise Studio.
+All rights reserved.
+
+This source package is provided for authorized Castwise Studio development and evaluation.
+Commercial redistribution of the source or derived application is not permitted without
+a separate written license from Castwise Studio.

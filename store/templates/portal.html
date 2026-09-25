@@ -1,0 +1,7 @@
+<!doctype html><html><body style="font-family:Arial;background:#0c1117;color:white;padding:45px;color:#eef4fa">
+<h1>Castwise Customer Portal</h1><p>Signed in as {{customer.email}}</p>
+{% for x in licenses %}<div style="background:#151d26;padding:20px;margin:15px 0;border-radius:10px">
+<h2>Audio Doctor</h2><p>License: {{x.license_id}}</p><p>Expires: {{x.expires}}</p><a href="/download/license/{{x.license_id}}" style="color:#4db3ff">Download License</a></div>{% else %}
+<p>No licenses are attached to this account yet.</p>{% endfor %}
+<p><a href="/download/installer" style="display:inline-block;background:#1688e8;color:white;padding:14px 22px;border-radius:7px;text-decoration:none">Download Windows Installer</a></p>
+<form method="post" action="/logout"><button>Log out</button></form></body></html>
