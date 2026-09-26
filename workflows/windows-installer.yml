@@ -1,0 +1,44 @@
+name: Build Castwise Audio Doctor Windows Installer
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ['v*']
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Run tests
+        run: pytest -q
+
+      - name: Build application
+        run: |
+          pyinstaller --noconfirm --clean --windowed --name CastwiseAudioDoctor --collect-all pyloudnorm --collect-all PySide6 --collect-all matplotlib --paths . -m castwise_audio_doctor
+
+      - name: Install Inno Setup
+        shell: powershell
+        run: choco install innosetup --yes --no-progress
+
+      - name: Build installer
+        shell: powershell
+        run: |
+          & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" installer\CastwiseAudioDoctor.iss
+
+      - name: Upload installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: Castwise-Audio-Doctor-Setup
+          path: installer\Castwise-Audio-Doctor-Setup-*.exe
